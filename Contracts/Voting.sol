@@ -6,52 +6,52 @@ contract Voting {
         string title;
         string description;
         string options;
-        uint options_number;
-        address wallet_autor;
+        uint optionsNumber;
+        address walletAutor;
         uint begin;
         uint end;
-        bool is_active;
+        bool isActive;
     }
 
-    uint curr_id = 1;    
+    uint currId = 1;    
     mapping(uint => Votation) public votations;
     mapping(uint => mapping(address => uint)) public votes;
 
-    function CreateVotation(string title, string description, string options, uint options_number, uint begin, uint end) 
+    function createVotation(string title, string description, string options, uint optionsNumber, uint begin, uint end) 
     public
     returns (uint) {
-        uint id = curr_id++;
+        uint id = currId++;
         Votation storage votation = votations[id];
         votation.id = id;
         votation.title = title;
         votation.description = description;
-        votation.wallet_autor = msg.sender;
+        votation.walletAutor = msg.sender;
         votation.begin = begin;        
         votation.end = end;
-        votation.is_active = true;        
+        votation.isActive = true;        
         votation.options = options;
-        votation.options_number = options_number;
+        votation.optionsNumber = optionsNumber;
 
         return id;
     }
 
-    function CloseVotation(uint votation_id) 
+    function closeVotation(uint votationId) 
     public {
-        require(votations[votation_id].id != 0);
-        require(votations[votation_id].wallet_autor == msg.sender);
-        require(votations[votation_id].is_active);
+        require(votations[votationId].id != 0);
+        require(votations[votationId].walletAutor == msg.sender);
+        require(votations[votationId].isActive);
         
-        votations[votation_id].is_active = false;
+        votations[votationId].isActive = false;
     }
 
-    function Vote(uint votation_id, uint option_id, uint curr_time) 
+    function vote(uint votationId, uint optionId, uint currTime) 
     public {
-        require(votations[votation_id].id != 0);
-        require(votations[votation_id].is_active);
-        require(votations[votation_id].end >= curr_time);
-        require(option_id != 0 && option_id <= votations[votation_id].options_number);
-        require(votes[votation_id][msg.sender] == 0);
+        require(votations[votationId].id != 0);
+        require(votations[votationId].isActive);
+        require(votations[votationId].end >= currTime);
+        require(optionId != 0 && optionId <= votations[votationId].optionsNumber);
+        require(votes[votationId][msg.sender] == 0);
 
-        votes[votation_id][msg.sender] = option_id;
+        votes[votationId][msg.sender] = optionId;
     }
 }
