@@ -7,20 +7,17 @@ contract Voting {
         string description;
         string options;
         address wallet_autor;
+        uint begin;
+        uint timeout;
         bool active;
         bool end;
     }
 
-    uint curr_id;    
+    uint curr_id = 1;    
     mapping(uint => Votation) public votations;
     mapping(uint => mapping(address => uint)) public votes;
 
-    function Voting()
-    public {
-        curr_id = 1;
-    }
-    
-    function CreateVotation(string title, string description, string options) 
+    function CreateVotation(string title, string description, string options, uint begin, uint timeout) 
     public
     returns (uint) {
         uint id = curr_id++;
@@ -32,6 +29,8 @@ contract Voting {
         votation.active = true;
         votation.end = false;
         votation.options = options;
+        votation.begin = begin;
+        votation.timeout = timeout;
 
         return id;
     }
