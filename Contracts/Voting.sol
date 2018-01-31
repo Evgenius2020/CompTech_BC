@@ -7,7 +7,7 @@ contract Voting {
         string description;
         string options;
         uint optionsNumber;
-        address walletAutor;
+        address walletAuthor;
         uint begin;
         uint end;
         bool isActive;
@@ -25,7 +25,7 @@ contract Voting {
         votation.id = id;
         votation.title = title;
         votation.description = description;
-        votation.walletAutor = msg.sender;
+        votation.walletAuthor = msg.sender;
         votation.begin = begin;        
         votation.end = end;
         votation.isActive = true;        
@@ -38,7 +38,7 @@ contract Voting {
     function closeVotation(uint votationId) 
     public {
         require(votations[votationId].id != 0);
-        require(votations[votationId].walletAutor == msg.sender);
+        require(votations[votationId].walletAuthor == msg.sender);
         require(votations[votationId].isActive);
         
         votations[votationId].isActive = false;
