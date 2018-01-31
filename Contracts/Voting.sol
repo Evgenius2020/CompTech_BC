@@ -35,4 +35,10 @@ contract Voting {
 
         return id;
     }
+
+    function Vote(uint votation_id, uint option_id) 
+    public {
+        require(votes[votation_id][msg.sender] == 0);
+        votes[votation_id][msg.sender] = option_id;
+    }
 }
