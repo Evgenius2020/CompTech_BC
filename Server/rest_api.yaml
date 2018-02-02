@@ -89,6 +89,8 @@ paths:
                     type: number
         400:
           description: "Incorrect data"
+        402:
+          description: "Not enough money"
         403:
           description: "Not authorized"
 
@@ -160,13 +162,15 @@ paths:
           application/json:
             schema:
               properties:
-                option:
-                  type: string
+                optionId:
+                  type: number
       responses:
         200:
           description: "OK"
         400:
-          description: "Bad option"
+          description: "Incorrect data"
+        402:
+          description: "Not enough money"
         403:
           description: "Not authorized"
         404:
@@ -223,7 +227,9 @@ paths:
                   id:
                     type: number
         400:
-          description: "Bad data"
+          description: "Incorrect data"
+        402:
+          description: "Not enough money"
         403:
           description: "Not authorized"
 
@@ -307,7 +313,7 @@ paths:
         200:
           description: "OK"
         400:
-          description: "Bad data"
+          description: "Incorrect data"
         402:
           description: "Not enough money"
         403:
