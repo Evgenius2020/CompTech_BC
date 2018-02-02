@@ -121,11 +121,12 @@ paths:
                     type: array
                     items:
                       properties:
+                        number:
+                          type: number
                         name:
                           type: string
-                        percentage:
+                        votes:
                           type: number
-                          format: float
                         wallets:
                           type: array
                           items:
@@ -204,9 +205,8 @@ paths:
                 amountNeed:
                   type: number
                   format: float
-                amountGot:
-                  type: number
-                  format: float
+                receiverWallet:
+                  type: string
                 begin:
                   type: string
                   format: date-time
@@ -268,6 +268,8 @@ paths:
                           type: number
                           format: float
                   authorWallet:
+                    type: string
+                  receiverWallet:
                     type: string
                   begin:
                     type: string
