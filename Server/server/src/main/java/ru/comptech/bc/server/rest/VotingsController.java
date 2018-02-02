@@ -184,6 +184,8 @@ public class VotingsController {
     private <T> T writeTransaction(ExceptionSupplier<T> supplier) throws Exception {
         try {
             return supplier.run();
+        } catch (RestException e) {
+            throw e;    //  RestException extends RuntimeException
         } catch (IOException e) {
             throw NODE_IS_UNAVAILABLE;
         } catch (RuntimeException e) {  //  TODO: replace RuntimeException with smt better
