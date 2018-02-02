@@ -21,9 +21,10 @@ contract Donating {
     mapping(uint => mapping(address => uint)) public donates;
 
     function createDonation(string title, string description, uint needToCollect, 
-        address walletReceiver, uint startingTime, uint endingTime) 
+        address walletReceiver, uint secondsToVote) 
     public
     {
+        require(secondsToVote != 0);
         uint id = currId++;
         Donation storage donation = donations[id];
         donation.id = id;
@@ -33,21 +34,20 @@ contract Donating {
         donation.needToCollect = needToCollect;
         donation.walletAuthor = msg.sender;
         donation.walletReceiver = walletReceiver;
-        donation.startingTime = startingTime;        
-        donation.endingTime = endingTime;
+        donation.startingTime = now;        
+        donation.endingTime = now + secondsToVote;
         donation.isActive = true;
 
         Creation(id);
     }
 
-    function donate(uint donationId, uint currTime)
+    function donate(uint donationId)
     payable
     public 
     {
         require(donations[donationId].id != 0);
         require(donations[donationId].isActive);
-        require(donations[donationId].startingTime <= currTime);
-        require(donations[donationId].endingTime >= currTime);        
+        require(donations[donationId].endingTime >= now);        
         require(msg.sender.balance >= msg.value);
         donates[donationId][msg.sender] += msg.value;
         donations[donationId].currentBalance += msg.value;
