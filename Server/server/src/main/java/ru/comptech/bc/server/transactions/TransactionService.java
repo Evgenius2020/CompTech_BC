@@ -1,4 +1,4 @@
-package ru.comptech.bc.server.util;
+package ru.comptech.bc.server.transactions;
 
 import org.web3j.tx.TransactionManager;
 
