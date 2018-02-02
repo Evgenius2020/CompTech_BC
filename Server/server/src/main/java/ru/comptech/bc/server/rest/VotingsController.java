@@ -41,6 +41,8 @@ public class VotingsController {
             new RestException(HttpStatus.BAD_REQUEST, "Incorrect data");
     private static final RestException NOT_ENOUGH_MONEY =
             new RestException(HttpStatus.PAYMENT_REQUIRED, "Not enough money");
+    private static final RestException CONTRACT_EXCEPTION =
+            new RestException(HttpStatus.BAD_GATEWAY, "Contract exception");
 
     @GetMapping
     public Map<String, Integer> get() throws Exception {
@@ -128,6 +130,7 @@ public class VotingsController {
             final TransactionReceipt transaction = voting.createVotation(title, description,
                     rawOptions, BigInteger.valueOf(optionsCount),
                     BigInteger.valueOf((end.getTime() - begin.getTime()) / 1000)).send();
+            testTransaction(transaction);
             return voting.getCreationEvents(transaction).get(0).votationId;
         });
 
@@ -155,7 +158,9 @@ public class VotingsController {
         }
 
         writeTransaction(() -> {
-            voting.vote(votationId, BigInteger.valueOf(optionId)).send();
+            final TransactionReceipt transaction =
+                    voting.vote(votationId, BigInteger.valueOf(optionId)).send();
+            testTransaction(transaction);
             return 0;
         });
     }
@@ -184,5 +189,10 @@ public class VotingsController {
         } catch (RuntimeException e) {  //  TODO: replace RuntimeException with smt better
             throw NOT_ENOUGH_MONEY;
         }
+    }
+
+    private void testTransaction(TransactionReceipt transaction) {
+        if (transaction.getGasUsed().equals(Contract.GAS_LIMIT))
+            throw CONTRACT_EXCEPTION;
     }
 }
