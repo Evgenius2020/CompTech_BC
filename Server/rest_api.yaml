@@ -21,6 +21,8 @@ paths:
                 wallet:
                   type: string
                   format: binary
+                password:
+                  type: string
       responses:
         200:
           description: "OK"
@@ -40,7 +42,7 @@ paths:
 
   /votings:
     get:
-      summary: "Get voting IDs list"
+      summary: "Get maximum voting ID"
       tags:
       - "voting"
       responses:
@@ -49,9 +51,9 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  type: string
+                properties:
+                  maxId:
+                    type: number
     post:
       summary: "Create new voting"
       tags:
@@ -84,7 +86,7 @@ paths:
               schema:
                 properties:
                   id:
-                    type: string
+                    type: number
         400:
           description: "Incorrect data"
         403:
@@ -100,7 +102,7 @@ paths:
         required: true
         name: votingId
         schema:
-          type: string
+          type: number
         description: "ID of the voting to get"
       responses:
         200:
@@ -110,7 +112,7 @@ paths:
               schema:
                 properties:
                   id:
-                    type: string
+                    type: number
                   title:
                     type: string
                   description:
@@ -119,11 +121,12 @@ paths:
                     type: array
                     items:
                       properties:
+                        number:
+                          type: number
                         name:
                           type: string
-                        percentage:
+                        votes:
                           type: number
-                          format: float
                         wallets:
                           type: array
                           items:
@@ -149,7 +152,7 @@ paths:
         required: true
         name: votingId
         schema:
-          type: string
+          type: number
         description: "ID of the voting to vote in"
       requestBody:
         required: true
@@ -173,7 +176,7 @@ paths:
 
   /payments:
     get:
-      summary: "Get payment IDs list"
+      summary: "Get maximum payment ID"
       tags:
       - "payments"
       responses:
@@ -182,9 +185,9 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  type: string
+                properties:
+                  maxId:
+                    type: number
     post:
       summary: "Create new payment"
       tags:
@@ -202,9 +205,8 @@ paths:
                 amountNeed:
                   type: number
                   format: float
-                amountGot:
-                  type: number
-                  format: float
+                receiverWallet:
+                  type: string
                 begin:
                   type: string
                   format: date-time
@@ -219,7 +221,7 @@ paths:
               schema:
                 properties:
                   id:
-                    type: string
+                    type: number
         400:
           description: "Bad data"
         403:
@@ -235,7 +237,7 @@ paths:
         required: true
         name: paymentId
         schema:
-          type: string
+          type: number
         description: "ID of the payment to get"
       responses:
         200:
@@ -245,7 +247,7 @@ paths:
               schema:
                 properties:
                   id:
-                    type: string
+                    type: number
                   title:
                     type: string
                   description:
@@ -267,6 +269,8 @@ paths:
                           format: float
                   authorWallet:
                     type: string
+                  receiverWallet:
+                    type: string
                   begin:
                     type: string
                     format: date-time
@@ -286,7 +290,7 @@ paths:
         required: true
         name: paymentId
         schema:
-          type: string
+          type: number
         description: "ID of the payment to take part in"
       requestBody:
         required: true
@@ -295,7 +299,7 @@ paths:
             schema:
               properties:
                 id:
-                  type: string
+                  type: number
                 amount:
                   type: number
                   format: float
