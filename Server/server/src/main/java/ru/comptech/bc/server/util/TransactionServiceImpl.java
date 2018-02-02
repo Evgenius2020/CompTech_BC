@@ -2,9 +2,16 @@ package ru.comptech.bc.server.util;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.web3j.crypto.CipherException;
+import org.web3j.crypto.Credentials;
+import org.web3j.crypto.WalletUtils;
 import org.web3j.protocol.Web3j;
+import org.web3j.tx.RawTransactionManager;
 import org.web3j.tx.ReadonlyTransactionManager;
 import org.web3j.tx.TransactionManager;
+import ru.comptech.bc.server.contracts.Voting;
+
+import java.io.IOException;
 
 @Service
 public class TransactionServiceImpl implements TransactionService {
@@ -29,6 +36,16 @@ public class TransactionServiceImpl implements TransactionService {
     }
 
     private TransactionManager getWrite() {
-        throw new UnsupportedOperationException();
+        final Credentials credentials;
+        try {
+            credentials = WalletUtils.loadCredentials(
+                    "1111",
+                    "/home/bolodya/Downloads/" +
+                            "UTC--2018-02-01T07-37-31.095482915Z--3a192eeeae04ab16f59d54aef2fb33b9d35592f0");
+        } catch (CipherException | IOException e) {
+            throw new UnsupportedOperationException();
+        }
+
+        return new RawTransactionManager(web3j, credentials);
     }
 }
