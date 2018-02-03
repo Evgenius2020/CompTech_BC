@@ -1,6 +1,0 @@
-# IDEA files
-**/.idea/
-**/*.iml
-
-# maven compiled
-**/target/
