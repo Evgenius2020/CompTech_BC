@@ -10,6 +10,7 @@ contract Voting {
         address walletAuthor;
         uint startingTime;
         uint endingTime;
+        uint votersCount;
     }
 
     event Creation(uint votationId);
@@ -17,6 +18,7 @@ contract Voting {
     uint public currId = 1;    
     mapping(uint => Votation) public votations;
     mapping(uint => mapping(address => uint)) public votes;
+    mapping(uint => mapping(uint => address)) public voters;
 
     function createVotation(string title, string description, string options,
         uint optionsNumber, uint secondsToVote) 
@@ -33,6 +35,7 @@ contract Voting {
         votation.endingTime = now + secondsToVote;
         votation.options = options;
         votation.optionsNumber = optionsNumber;
+        votation.optionsNumber = 0;
 
         Creation(id);
     }
@@ -41,6 +44,8 @@ contract Voting {
     public 
     {
         require(checkVoteException(votationId, optionId) == 0);
+        uint voterId = votations[votationId].votersCount++;
+        voters[votationId][voterId] = msg.sender;
         votes[votationId][msg.sender] = optionId;
     }
 
