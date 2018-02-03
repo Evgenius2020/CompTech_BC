@@ -86,6 +86,8 @@ public class DonatingsController {
                 String wallet = donating.moneysenders(Id,BigInteger.valueOf(i)).send();
                 donaters.add(wallet);
                 BigInteger money = donating.donates(Id,wallet).send();
+                BigInteger div = BigInteger.TEN.pow(18);
+                money = money.divide(div);
                 summ.add(money.longValue());
             }
 
