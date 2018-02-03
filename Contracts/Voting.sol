@@ -20,17 +20,18 @@ contract Voting {
     mapping(uint => mapping(address => uint)) public votes;
 
     function createVotation(string title, string description, string options,
-        uint optionsNumber, uint startingTime, uint endingTime) 
+        uint optionsNumber, uint secondsToVote) 
     public
     {
+        require(secondsToVote != 0);
         uint id = currId++;
         Votation storage votation = votations[id];
         votation.id = id;
         votation.title = title;
         votation.description = description;
         votation.walletAuthor = msg.sender;
-        votation.startingTime = startingTime;        
-        votation.endingTime = endingTime;
+        votation.startingTime = now;        
+        votation.endingTime = now + secondsToVote;
         votation.isActive = true;        
         votation.options = options;
         votation.optionsNumber = optionsNumber;
@@ -48,13 +49,12 @@ contract Voting {
         votations[votationId].isActive = false;
     }
 
-    function vote(uint votationId, uint optionId, uint currTime) 
+    function vote(uint votationId, uint optionId) 
     public 
     {
         require(votations[votationId].id != 0);
         require(votations[votationId].isActive);
-        require(votations[votationId].startingTime <= currTime);
-        require(votations[votationId].endingTime >= currTime);
+        require(votations[votationId].endingTime >= now);
         require(optionId != 0 && optionId <= votations[votationId].optionsNumber);
         require(votes[votationId][msg.sender] == 0);
 

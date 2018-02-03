@@ -1,0 +1,312 @@
+openapi: 3.0.0
+info:
+  title: "CompTechBC"
+  version: "0.1"
+servers:
+  - url: 18.216.116.21/rest
+
+paths:
+
+  /login:
+    post:
+      summary: "Log in"
+      tags:
+      - "session"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              properties:
+                wallet:
+                  type: string
+                  format: binary
+      responses:
+        200:
+          description: "OK"
+        400:
+          description: "Wallet is incorrect"
+
+  /logout:
+    post:
+      summary: "Log out"
+      tags:
+      - "session"
+      responses:
+        200:
+          description: "OK"
+
+# --- --- --- --- --- --- --- --- --- --- --- --- --- ---
+
+  /votings:
+    get:
+      summary: "Get voting IDs list"
+      tags:
+      - "voting"
+      responses:
+        200:
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+    post:
+      summary: "Create new voting"
+      tags:
+      - "voting"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              properties:
+                title:
+                  type: string
+                description:
+                  type: string
+                options:
+                  type: array
+                  items:
+                    type: string
+                begin:
+                  type: string
+                  format: date-time
+                end:
+                  type: string
+                  format: date-time
+      responses:
+        201:
+          description: "Created"
+          content:
+            application/json:
+              schema:
+                properties:
+                  id:
+                    type: string
+        400:
+          description: "Incorrect data"
+        403:
+          description: "Not authorized"
+
+  /votings/{votingId}:
+    get:
+      summary: "Get voting by ID"
+      tags:
+      - "voting"
+      parameters:
+      - in: path
+        required: true
+        name: votingId
+        schema:
+          type: string
+        description: "ID of the voting to get"
+      responses:
+        200:
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                properties:
+                  id:
+                    type: string
+                  title:
+                    type: string
+                  description:
+                    type: string
+                  options:
+                    type: array
+                    items:
+                      properties:
+                        name:
+                          type: string
+                        percentage:
+                          type: number
+                          format: float
+                        wallets:
+                          type: array
+                          items:
+                            type: string
+                  authorWallet:
+                    type: string
+                  begin:
+                    type: string
+                    format: date-time
+                  end:
+                    type: string
+                    format: date-time
+                  active:
+                    type: boolean
+        404:
+          description: "Not found"
+    put:
+      summary: "Vote for the selected option"
+      tags:
+      - "voting"
+      parameters:
+      - in: path
+        required: true
+        name: votingId
+        schema:
+          type: string
+        description: "ID of the voting to vote in"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              properties:
+                option:
+                  type: string
+      responses:
+        200:
+          description: "OK"
+        400:
+          description: "Bad option"
+        403:
+          description: "Not authorized"
+        404:
+          description: "Not found"
+
+# --- --- --- --- --- --- --- --- --- --- --- --- --- ---
+
+  /payments:
+    get:
+      summary: "Get payment IDs list"
+      tags:
+      - "payments"
+      responses:
+        200:
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+    post:
+      summary: "Create new payment"
+      tags:
+      - "payments"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              properties:
+                title:
+                  type: string
+                description:
+                  type: string
+                amountNeed:
+                  type: number
+                  format: float
+                amountGot:
+                  type: number
+                  format: float
+                begin:
+                  type: string
+                  format: date-time
+                end:
+                  type: string
+                  format: date-time
+      responses:
+        201:
+          description: "Created"
+          content:
+            application/json:
+              schema:
+                properties:
+                  id:
+                    type: string
+        400:
+          description: "Bad data"
+        403:
+          description: "Not authorized"
+
+  /payments/{paymentId}:
+    get:
+      summary: "Get payment by ID"
+      tags:
+      - "payments"
+      parameters:
+      - in: path
+        required: true
+        name: paymentId
+        schema:
+          type: string
+        description: "ID of the payment to get"
+      responses:
+        200:
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                properties:
+                  id:
+                    type: string
+                  title:
+                    type: string
+                  description:
+                    type: string
+                  amountNeed:
+                    type: number
+                    format: float
+                  amountGot:
+                    type: number
+                    format: float
+                  parts:
+                    type: array
+                    items:
+                      properties:
+                        wallet:
+                          type: string
+                        amount:
+                          type: number
+                          format: float
+                  authorWallet:
+                    type: string
+                  begin:
+                    type: string
+                    format: date-time
+                  end:
+                    type: string
+                    format: date-time
+                  active:
+                    type: boolean
+        404:
+          description: "Not found"
+    put:
+      summary: "Take part in the selected payment"
+      tags:
+      - "payments"
+      parameters:
+      - in: path
+        required: true
+        name: paymentId
+        schema:
+          type: string
+        description: "ID of the payment to take part in"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              properties:
+                id:
+                  type: string
+                amount:
+                  type: number
+                  format: float
+      responses:
+        200:
+          description: "OK"
+        400:
+          description: "Bad data"
+        402:
+          description: "Not enough money"
+        403:
+          description: "Not authorized"
+        404:
+          description: "Not found"
