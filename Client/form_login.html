@@ -56,21 +56,22 @@
                 <form action="/rest/login" method="post">
                     <div class="form-group">
                         <label for="exampleInputFile">Ваш файл кошелька</label>
-                        <input type="file" name="walletFile" class="form-control-file" id="exampleInputFile" aria-describedby="fileHelp">
+                        <!--<input type="file" name="walletFileName" class="form-control-file" id="exampleInputFile" aria-describedby="fileHelp">-->
+                        <textarea rows="10" id="exampleInputFile" cols="90" name="walletFile"></textarea>
                         <small id="fileHelp" class="form-text text-muted">Введите файл вашего кошелька Ethereum.</small>
                     </div>
                     <div class="form-group">
                         <label for="exampleInputPassword1">Приватный пароль</label>
                         <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
                     </div>
-                    <button type="submit" class="btn btn-primary">Отправить</button>
+                    <button id="button-form-submit" type="submit" class="btn btn-primary">Отправить</button>
                 </form>
             </div>
 
-            <div class="mastfoot">
+            <!--<div class="mastfoot">
                 <div class="inner">
                 </div>
-            </div>
+            </div>-->
 
         </div>
 
