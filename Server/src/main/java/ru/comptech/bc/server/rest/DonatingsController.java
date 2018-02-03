@@ -12,6 +12,7 @@ import org.web3j.protocol.Web3j;
 import org.web3j.protocol.core.methods.response.TransactionReceipt;
 
 import org.web3j.tx.TransactionManager;
+import org.web3j.utils.Convert;
 import ru.comptech.bc.server.contracts.Donating;
 import ru.comptech.bc.server.model.Donation;
 import ru.comptech.bc.server.util.DateFormatter;
@@ -20,9 +21,11 @@ import ru.comptech.bc.server.transactions.TransactionService;
 
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.*;
 
+import static org.bouncycastle.pqc.math.linearalgebra.IntegerFunctions.pow;
 import static org.web3j.tx.Contract.GAS_LIMIT;
 import static org.web3j.tx.Contract.GAS_PRICE;
 
@@ -55,7 +58,6 @@ public class DonatingsController {
     @GetMapping
         public Object getMaxId() throws Exception {
             final TransactionManager manager = transactionService.get(TransactionService.Type.READ);
-
             final Donating donating = Donating.load(contractAddres,web3j,manager,GAS_PRICE,GAS_LIMIT);
 
             final BigInteger currId = donating.currId().send();
@@ -66,53 +68,52 @@ public class DonatingsController {
         @GetMapping(path = "/{paymentId}")
         public Object getPaymentById(@PathVariable Integer paymentId) throws Exception {
             final TransactionManager manager = transactionService.get(TransactionService.Type.READ);
-
             final Donating donating = Donating.load(contractAddres, web3j, manager, GAS_PRICE, GAS_LIMIT);
 
-            final BigInteger Id = BigInteger.valueOf(paymentId);
-
+            final BigInteger id = BigInteger.valueOf(paymentId);
             final Donation donation;
             try {
-                donation = donating.donations(Id).send();
+                donation = donating.donations(id).send();
             } catch (IllegalArgumentException e) {
                 throw new RestException(HttpStatus.NOT_FOUND, "Not found");
             }
 
 
-            ArrayList<String> donaters = new ArrayList<String>();
-            ArrayList<Long> summ = new ArrayList<>();
+            final ArrayList<String> donaters = new ArrayList<String>();
+            final ArrayList<Long> summ = new ArrayList<>();
 
             for (int i = 1; i <= donation.getAmountOfPayers(); i++) {
-                String wallet = donating.moneysenders(Id,BigInteger.valueOf(i)).send();
+                final String wallet = donating.moneysenders(id,BigInteger.valueOf(i)).send();
                 donaters.add(wallet);
-                BigInteger money = donating.donates(Id,wallet).send();
-                BigInteger div = BigInteger.TEN.pow(18);
-                money = money.divide(div);
-                summ.add(money.longValue());
+
+                final BigInteger weiValue = donating.donates(id,wallet).send();
+                final BigInteger ethValue = (Convert.fromWei(weiValue.toString(), Convert.Unit.ETHER)).toBigInteger();
+                summ.add(ethValue.longValue());
             }
 
-            ArrayList<Map> parts = new ArrayList<>();
+            final ArrayList<Map> parts = new ArrayList<>();
             for (int i = 0; i < donaters.size(); i++) {
                 parts.add(Map.of("wallet",donaters.get(i),"amount", summ.get(i)));
             }
 
 
-            BigInteger needId = BigInteger.valueOf(paymentId);
+            final int amountOfPayers = donation.getAmountOfPayers();
+            final String title = donation.getTitle();
+            final String description = donation.getDescription();
 
-            long id = donation.getId();
-            int amountOfPayers = donation.getAmountOfPayers();
-            String title = donation.getTitle();
-            String description = donation.getDescription();
-            long curBalance = donation.getCurrentBalance();
-            long needToCollect = donation.getNeedToCollect();
-            String walletAuthor = donation.getWalletAuthor();
-            String walletReceiver = donation.getWalletReceiver();
-            Date startingTime = donation.getStartingTime();
-            Date endingTime = donation.getEndingTime();
-            boolean isActive = donation.getIsActive();
+            final String walletAuthor = donation.getWalletAuthor();
+            final String walletReceiver = donation.getWalletReceiver();
+            final Date startingTime = donation.getStartingTime();
+            final Date endingTime = donation.getEndingTime();
+            final boolean isActive = donation.getIsActive();
 
-            HashMap<String,Object> map = new HashMap<>();
-            map.putAll(Map.of("id",id,"title",title,"description",description,"amountNeed", needToCollect, "amountGot",curBalance,
+            final BigInteger curBalance = donation.getCurrentBalance();
+            final BigInteger amountGot = (Convert.fromWei(curBalance.toString(), Convert.Unit.ETHER)).toBigInteger();
+            final BigInteger needToCollect = donation.getNeedToCollect();
+            final BigInteger amountNeed = (Convert.fromWei(needToCollect.toString(), Convert.Unit.ETHER)).toBigInteger();
+
+            final HashMap<String,Object> map = new HashMap<>();
+            map.putAll(Map.of("id",id,"title",title,"description",description,"amountNeed", amountNeed, "amountGot",amountGot,
                     "parts",parts,"authorWallet",walletAuthor,"receiverWallet",walletReceiver,"begin",startingTime.getTime()/1000,
                     "end",endingTime.getTime()/1000));
             map.put("isActive",isActive);
@@ -122,7 +123,7 @@ public class DonatingsController {
         }
 
         @PostMapping
-        @Secured("ROLE_USER")
+        //@Secured("ROLE_USER")
         public Object createNewPayment (@RequestBody Map<String,Object> payment) throws Exception{
             final TransactionManager manager = transactionService.get(TransactionService.Type.WRITE);
 
@@ -130,24 +131,23 @@ public class DonatingsController {
 
             final String title,description,walletReceiver;
             final BigInteger amountNeed,secondsToVote;
+            final BigInteger weiValue;
             try {
                 title = (String) payment.get("title");
                 description = (String) payment.get("description");
-                amountNeed = BigInteger.valueOf((int) payment.get("amountNeed"));  //FIXME : IS IT OKAY???
+                amountNeed = BigInteger.valueOf((int) payment.get("amountNeed"));
                 walletReceiver = (String) payment.get("receiverWallet");
-
-
                 final Date dateBegin = DateFormatter.stringToData((String) payment.get("begin"));
                 final Date dateEnd = DateFormatter.stringToData((String) payment.get("end"));
-
-                secondsToVote = BigInteger.valueOf(dateEnd.getTime() / 1000 - dateBegin.getTime() / 1000);
+                weiValue = Convert.toWei(amountNeed.toString(), Convert.Unit.ETHER).toBigInteger();
+                secondsToVote = BigInteger.valueOf((dateEnd.getTime() - dateBegin.getTime()) / 1000);
             } catch (Exception e) {
                 throw INCORRECT_DATA;
             }
 
             final BigInteger id = writeTransaction(() -> {
                 final TransactionReceipt transaction = donating.createDonation(title,description,
-                        amountNeed,walletReceiver,secondsToVote).send();
+                        weiValue,walletReceiver,secondsToVote).send();
                 testTransaction(transaction);
                 return donating.getCreationEvents(transaction).get(0).donationId;
             });
@@ -156,7 +156,7 @@ public class DonatingsController {
         }
 
         @PutMapping(path = "/{paymentId}")
-        @Secured("ROLE_USER")
+        //@Secured("ROLE_USER")
         public void Donate(@PathVariable Integer paymentId,@RequestBody Map<String,Integer> json) throws Exception{
             final TransactionManager manager = transactionService.get(TransactionService.Type.WRITE);
             final Donating donating = Donating.load(contractAddres, web3j, manager, GAS_PRICE, GAS_LIMIT);
@@ -171,9 +171,9 @@ public class DonatingsController {
                 throw INCORRECT_DATA;
             }
 
-            BigInteger weiValue = BigInteger.valueOf(json.get("amount"));
-            BigInteger mul = BigInteger.TEN.pow(18);
+            final BigInteger ethValue =  BigInteger.valueOf(json.get("amount"));
 
+            final BigInteger weiValue = (Convert.toWei(ethValue.toString(), Convert.Unit.ETHER)).toBigInteger();
             writeTransaction(() -> {
                 final TransactionReceipt transaction =
                         donating.donate(id, weiValue.multiply(mul)).send();

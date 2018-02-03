@@ -132,12 +132,12 @@ public class Donating extends Contract {
                         List<Type> results = executeCallMultipleValueReturn(function);
                         final int id = ((BigInteger) results.get(0).getValue()).intValue();
                         if (id == 0)
-                            throw  new IllegalArgumentException();  //FIXME : IS IT OKAY?
+                            throw  new IllegalArgumentException();  
                         final int amountOfPayers = ((BigInteger) results.get(1).getValue()).intValue();
                         final String title = (String) results.get(2).getValue();
                         final String description = (String) results.get(3).getValue();
-                        final long currentBalance = ((BigInteger) results.get(4).getValue()).longValue();
-                        final long needToCollect = ((BigInteger) results.get(5).getValue()).longValue();
+                        final BigInteger currentBalance = ((BigInteger) results.get(4).getValue());
+                        final BigInteger needToCollect = ((BigInteger) results.get(5).getValue());
                         final String walletAuthor = (String) results.get(6).getValue();
                         final String walletReceiver = (String) results.get(7).getValue();
                         final long startingTime = ((BigInteger) results.get(8).getValue()).longValue();

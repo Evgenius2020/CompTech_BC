@@ -28,6 +28,19 @@ paths:
           description: "OK"
         400:
           description: "Wallet is incorrect"
+      get:
+        summary: "Is logged in?"
+        tags:
+        - "session"
+        responses:
+          200:
+            description: "OK"
+            content:
+              application/json:
+                schema:
+                  properties:
+                    loggedIn:
+                      type: boolean
 
   /logout:
     post:

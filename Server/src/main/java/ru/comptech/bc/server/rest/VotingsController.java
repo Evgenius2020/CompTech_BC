@@ -156,7 +156,7 @@ public class VotingsController {
 
         final int optionId;
         try {
-            optionId = (int) json.get("option");
+            optionId = (int) json.get("optionId");
             if (optionId == 0 || optionId > votation.getOptions().length)
                 throw new Exception();
         } catch (Exception e) {
