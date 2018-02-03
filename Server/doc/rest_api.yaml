@@ -304,8 +304,6 @@ paths:
           application/json:
             schema:
               properties:
-                id:
-                  type: number
                 amount:
                   type: number
                   format: float
