@@ -24,7 +24,6 @@ contract Donating {
         address walletReceiver) 
     public
     {
-        require(secondsToVote != 0);
         uint id = currId++;
         Donation storage donation = donations[id];
         donation.id = id;
