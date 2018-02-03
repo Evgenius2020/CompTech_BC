@@ -21,13 +21,13 @@ import java.io.IOException;
 public class WalletAuthenticationFilter extends AbstractAuthenticationProcessingFilter {
 
     private static class JSON {
-        private final WalletFile wallet;
+        private final WalletFile walletFile;
         private final String password;
 
         @JsonCreator
-        private JSON(@JsonProperty(value = "wallet") WalletFile wallet,
+        private JSON(@JsonProperty(value = "walletFile") WalletFile walletFile,
                      @JsonProperty(value = "password") String password) {
-            this.wallet = wallet;
+            this.walletFile = walletFile;
             this.password = password;
         }
     }
@@ -52,7 +52,7 @@ public class WalletAuthenticationFilter extends AbstractAuthenticationProcessing
         final JSON json = mapper.readValue(builder.toString(), JSON.class);
 
         final WalletAuthentication authRequest =
-                new WalletAuthentication(json.wallet, json.password);
+                new WalletAuthentication(json.walletFile, json.password);
 
         return this.getAuthenticationManager().authenticate(authRequest);
     }

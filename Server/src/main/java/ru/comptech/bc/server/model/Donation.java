@@ -1,5 +1,6 @@
 package ru.comptech.bc.server.model;
 
+import java.math.BigInteger;
 import java.text.DateFormat;
 import java.util.Date;
 
@@ -12,8 +13,8 @@ public class Donation {
     private final String title;
     private final String description;
 
-    private final long currentBalance;
-    private final long needToCollect;
+    private final BigInteger currentBalance;
+    private final BigInteger needToCollect;
 
     private final String walletAuthor;
     private final String walletReceiver;
@@ -24,7 +25,7 @@ public class Donation {
     private boolean isActive;
 
     public Donation(long id,int amountOfPayers,String title,String description,
-                    long currentBalance,long needToCollect,String walletAuthor,
+                    BigInteger currentBalance,BigInteger needToCollect,String walletAuthor,
                     String walletReceiver,Date startingTime, Date endingTime,boolean isActive) {
         this.id = id;
         this.amountOfPayers = amountOfPayers;
@@ -62,11 +63,11 @@ public class Donation {
         return startingTime;
     }
 
-    public long getCurrentBalance() {
+    public BigInteger getCurrentBalance() {
         return currentBalance;
     }
 
-    public long getNeedToCollect() {
+    public BigInteger getNeedToCollect() {
         return needToCollect;
     }
 
