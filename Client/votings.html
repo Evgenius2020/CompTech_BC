@@ -13,7 +13,7 @@
     <title>Управление общежитие с помощью смарт-контрактов</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
 
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <link href="css/ie10-viewport-bug-workaround.css" rel="stylesheet">
@@ -47,113 +47,101 @@
                     <a href="#"><button type="button" class="btn btn-primary">Вход</button></a>
                 </div>
             </div>
-            <div class="">
-                <div class="row">
+            <h1 class="cover-heading">Голосования с помощью блокчейна</h1>
+            <div id="main-container">
+                <div class="inner cover voting-container">
                     <div class="col-xs-12 col-md-8">
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                <h3 class="panel-title">Выборы 2018</h3>
+                                <h3 class="panel-title">Выбираем старосту общежития</h3>
                             </div>
                             <div class="panel-body">
-                                За кого вы проголосуете в 2018 году?<br/>
+                                Давайте, друзья, проголосуем за нового старосту общежития<br/>
                                 Ниже представлены варианты:<br/>
-                                <span style="float: left; ">Путин</span><br/>
+                                <span style="float: left; ">Коля Петров</span><br/>
+                                <div class="progress">
+                                    <div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width: 15%;"><span class="sr-only">Complete</span>15</div>
+                                </div>
+                                <span style="float: left; ">Анна Смирнова</span><br/>
+                                <div class="progress">
+                                    <div class="progress-bar" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100" style="width: 40%;"><span class="sr-only">Complete</span>40</div>
+                                </div>
+                                <span style="float: left; ">Вера Колесниченко</span><br/>
+                                <div class="progress">
+                                    <div class="progress-bar" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: 5%;"><span class="sr-only">Complete</span>5</div>
+                                </div>
+                                <span style="float: left; ">Петр Гусев</span><br/>
+                                <div class="progress">
+                                    <div class="progress-bar" role="progressbar" aria-valuenow="5" aria-valuemin="0" aria-valuemax="100" style="width: 40%;"><span class="sr-only">Complete</span>40</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-6 col-md-4">
+                        <a data-id="1" class="ls-modal" href="#">Просмотреть список проголосовавших</a><br/>
+                        <span style="font-size: 12px;color:red;">Голосовать могут только авторизированные пользователи</span><br/>
+                    </div>
+                </div>
+                <div class="inner cover voting-container">
+                    <div class="col-xs-12 col-md-8">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Стол для настольного тенниса</h3>
+                            </div>
+                            <div class="panel-body">
+                                Скинемся на стол для настольного тенниса?<br/>
+                                Ниже представлены варианты:<br/>
+                                <span style="float: left; ">Да</span><br/>
+                                <div class="progress">
+                                    <div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width: 15%;"><span class="sr-only">Complete</span>15</div>
+                                </div>
+                                <span style="float: left; ">Нет</span><br/>
+                                <div class="progress">
+                                    <div class="progress-bar" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100" style="width: 40%;"><span class="sr-only">Complete</span>40</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-6 col-md-4">
+                        <a data-id="2" class="ls-modal" href="#">Просмотреть список проголосовавших</a><br/>
+                        <span style="font-size: 12px;color:red;">Голосовать могут только авторизированные пользователи</span><br/>
+                    </div>
+                </div>
+                <div class="inner cover voting-container">
+                    <div class="col-xs-12 col-md-8">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Уборка территории общаги</h3>
+                            </div>
+                            <div class="panel-body">
+                                Давайте уберемся на территории общаги?<br/>
+                                Ниже представлены варианты:<br/>
+                                <span style="float: left; ">На субботник</span><br/>
                                 <div class="progress">
                                     <div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width: 60%;"><span class="sr-only">Complete</span>60</div>
                                 </div>
-                                <span style="float: left; ">Явлинский</span><br/>
+                                <span style="float: left; ">Не хочу</span><br/>
                                 <div class="progress">
                                     <div class="progress-bar" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100" style="width: 10%;"><span class="sr-only">Complete</span>10</div>
                                 </div>
-                                <span style="float: left; ">Жириновский</span><br/>
+                                <span style="float: left; ">Не знаю</span><br/>
                                 <div class="progress">
                                     <div class="progress-bar" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: 25%;"><span class="sr-only">Complete</span>25</div>
                                 </div>
-                                <span style="float: left; ">Зюганов</span><br/>
-                                <div class="progress">
-                                    <div class="progress-bar" role="progressbar" aria-valuenow="5" aria-valuemin="0" aria-valuemax="100" style="width: 5%;"><span class="sr-only">Complete</span>5</div>
-                                </div>
                             </div>
                         </div>
                     </div>
                     <div class="col-xs-6 col-md-4">
-                        <span style="font-size: 12px;color:red;"><br/>Голосовать могут только авторизированные пользователи</span>
-                        <a href="#">Просмотреть список проголосовавших</a>
+                        <a data-id="3" href="#" class="ls-modal">Просмотреть список проголосовавших</a><br/>
+                        <span style="font-size: 12px;color:red;">Голосовать могут только авторизированные пользователи</span><br/>
                     </div>
+                </div>
 
-                </div>
-              <!--  <div class="row">
-                    <div class="col-xs-12 col-md-8">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h3 class="panel-title">Выбираем старосту общежития</h3>
-                            </div>
-                            <div class="panel-body">
-                                Давайте, друзья, проголосуем за нового старосту общежития<br/>
-                                Ниже представлены варианты:<br/>
-                                <span style="float: left; ">Коля Петров</span><br/>
-                                <div class="progress">
-                                    <div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width: 15%;"><span class="sr-only">Complete</span>15</div>
-                                </div>
-                                <span style="float: left; ">Анна Смирнова</span><br/>
-                                <div class="progress">
-                                    <div class="progress-bar" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100" style="width: 40%;"><span class="sr-only">Complete</span>40</div>
-                                </div>
-                                <span style="float: left; ">Вера Колесниченко</span><br/>
-                                <div class="progress">
-                                    <div class="progress-bar" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: 5%;"><span class="sr-only">Complete</span>5</div>
-                                </div>
-                                <span style="float: left; ">Петр Гусев</span><br/>
-                                <div class="progress">
-                                    <div class="progress-bar" role="progressbar" aria-valuenow="5" aria-valuemin="0" aria-valuemax="100" style="width: 40%;"><span class="sr-only">Complete</span>40</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xs-6 col-md-4">
-                        <span style="font-size: 12px;color:red;"><br/>Голосовать могут только авторизированные пользователи</span>
-                        <a href="#">Просмотреть список проголосовавших</a>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-xs-12 col-md-8">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h3 class="panel-title">Выбираем старосту общежития</h3>
-                            </div>
-                            <div class="panel-body">
-                                Давайте, друзья, проголосуем за нового старосту общежития<br/>
-                                Ниже представлены варианты:<br/>
-                                <span style="float: left; ">Коля Петров</span><br/>
-                                <div class="progress">
-                                    <div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width: 15%;"><span class="sr-only">Complete</span>15</div>
-                                </div>
-                                <span style="float: left; ">Анна Смирнова</span><br/>
-                                <div class="progress">
-                                    <div class="progress-bar" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100" style="width: 40%;"><span class="sr-only">Complete</span>40</div>
-                                </div>
-                                <span style="float: left; ">Вера Колесниченко</span><br/>
-                                <div class="progress">
-                                    <div class="progress-bar" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: 5%;"><span class="sr-only">Complete</span>5</div>
-                                </div>
-                                <span style="float: left; ">Петр Гусев</span><br/>
-                                <div class="progress">
-                                    <div class="progress-bar" role="progressbar" aria-valuenow="5" aria-valuemin="0" aria-valuemax="100" style="width: 40%;"><span class="sr-only">Complete</span>40</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xs-6 col-md-4">
-                        <span style="font-size: 12px;color:red;"><br/>Голосовать могут только авторизированные пользователи</span>
-                        <a href="#">Просмотреть список проголосовавших</a>
-                    </div>
-                </div>-->
             </div>
-
-            <div class="mastfoot">
+            <!--<div class="mastfoot">
                 <div class="inner">
                 </div>
-            </div>
+            </div>-->
 
         </div>
 
@@ -161,12 +149,104 @@
 
 </div>
 
+<div id="myModal" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Event</h4>
+            </div>
+            <div class="modal-body">
+                <p>Loading...</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+                <!--<button type="submit" class="btn btn-primary">Save changes</button>-->
+            </div>
+        </div>
+    </div>
 <!-- Bootstrap core JavaScript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
 <script src="js/1.12.4_jquery.min.js"></script>
 <script>window.jQuery || document.write('<script src="js/1.12.4_jquery.min.js"><\/script>')</script>
 <script src="js/bootstrap.min.js"></script>
+<script type="text/javascript">
+    /*
+    * Здесь все скрипты загружаются после скачивания страницы html
+     */
+    $( document ).ready(function() {
+        /*
+        * Это функция для всплывающего окна "Список проголосовавших". Она делает GET-запрос по data-id
+         */
+        $('.ls-modal').on('click', function(e){
+            e.preventDefault();
+            var id = $(this).attr('data-id');
+            var url0 = "/rest/votings/";
+            var url1 = url0.concat(id);
+            $(".modal-body").html(id);
+            $('#myModal').modal('show').find('.modal-body').load($(this).attr('href'));
+        });
+        /*
+        * Это функция для выведения на экран список всех голосований. Делаем GET-запрос по Ajax
+         */
+        $.getJSON("/rest/votings", function ( data, textStatus, jqXHR ) { // указываем url и функцию обратного вызова
+            var maxId = data['maxId'];
+            $("#main-container").html('');      //очищаем div
+            for (var i=0; i<maxId; i++) {
+                var url0 = "/rest/votings/";
+                var stri = (i+1).toString();
+                var url1 = url0.concat(stri);
+                $.getJSON(url1, function (data, textStatus, jqXHR) {
+                    var id = data['id'];
+                    var title = data['title'];
+                    var description = data['description'];
+                    var options = data['options'];
+                    var authorWallet = data['authorWallet'];
+                    var begin = data['begin'];
+                    var end = data['end'];
+                    var active = data['active'];
+                    $("#main-container").append('<div class="inner cover voting-container">' +
+                        '<div class="col-xs-12 col-md-8">' +
+                        '<div class="panel panel-default">' +
+                        '<div class="panel-heading">' +
+                        '<h3 class="panel-title">'+title+'</h3>' +
+                        '</div>' +
+                        '<div class="panel-body">' + description +
+                        '<br/>Ниже представлены варианты:<br/>');
+                    var votes_summa = 0;
+                    for (var j=0; j<options.length; j++) {
+                        var votes = options[j]['votes'];
+                        votes_summa += votes;
+                    }
+                    for (var j=0; j<options.length; j++) {
+                        var number = options[j]['number'];
+                        var name = options[j]['name'];
+                        var votes = options[j]['votes'];
+                        var wallets = options[j]['wallets'];
+                        var percent = (votes/votes_summa*100).toFixed(0);
+                        $("#main-container").append('<span style="float: left; ">'+ name +'</span><br/>' +
+                            '<div class="progress">' +
+                            '<div class="progress-bar" role="progressbar" aria-valuenow="'+percent+'" aria-valuemin="0" aria-valuemax="100" style="width: '+percent+'%;">' +
+                            '<span class="sr-only">Complete</span>'+ votes +
+                            '</div>' +
+                            '</div>');
+                    }
+                    $("#main-container").append('</div>' +
+                        '</div>' +
+                        '</div>' +
+                        '<div class="col-xs-6 col-md-4">' +
+                        '<a data-id="'+i+'" class="ls-modal" href="#">Просмотреть список проголосовавших</a><br/>' +
+                        '<span style="font-size: 12px;color:red;">Голосовать могут только авторизированные пользователи</span><br/>' +
+                        '</div>' +
+                        '</div>');
+                });
+            }
+        });
+
+
+    });
+</script>
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 <script src="js/ie10-viewport-bug-workaround.js"></script>
 </body>

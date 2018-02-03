@@ -1,6 +1,13 @@
 /*
  * Globals
  */
+.modal-content{
+  color: #000;
+}
+
+.panel-body {
+  color: #000;
+}
 
 /* Links */
 a,
@@ -56,6 +63,11 @@ body {
 /* Padding for spacing */
 .inner {
   padding: 30px;
+}
+
+.voting-container {
+  position: relative;
+  top: 0;
 }
 
 
@@ -135,7 +147,8 @@ body {
 @media (min-width: 768px) {
   /* Pull out the header and footer */
   .masthead {
-    position: fixed;
+    /* position: fixed; */
+    position: relative;
     top: 0;
   }
   .mastfoot {
