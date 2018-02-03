@@ -3,6 +3,7 @@ pragma solidity ^0.4.18;
 contract Donating {
     struct Donation {
         uint id;
+        uint amountOfPayers;
         string title;
         string description;
         uint currentBalance;
@@ -19,6 +20,7 @@ contract Donating {
     uint public currId = 1;    
     mapping(uint => Donation) public donations;
     mapping(uint => mapping(address => uint)) public donates;
+    mapping(uint => mapping(uint => address)) public moneysenders;
 
     function createDonation(string title, string description, uint needToCollect, 
         address walletReceiver, uint secondsToVote) 
@@ -37,7 +39,8 @@ contract Donating {
         donation.startingTime = now;        
         donation.endingTime = now + secondsToVote;
         donation.isActive = true;
-
+        donation.amountOfPayers = 0;
+        
         Creation(id);
     }
 
@@ -49,8 +52,15 @@ contract Donating {
         require(donations[donationId].isActive);
         require(donations[donationId].endingTime >= now);        
         require(msg.sender.balance >= msg.value);
+
+        if (donates[donationId][msg.sender] == 0) {
+            donations[donationId].amountOfPayers++;
+            moneysenders[donationId][donations[donationId].amountOfPayers] = msg.sender;
+        }
+
         donates[donationId][msg.sender] += msg.value;
         donations[donationId].currentBalance += msg.value;
+
         if (this.balance >= donations[donationId].needToCollect) {
             donations[donationId].isActive = false;
             donations[donationId].walletReceiver.transfer(this.balance);
