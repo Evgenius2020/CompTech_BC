@@ -1,6 +1,8 @@
 package ru.comptech.bc.server.transactions;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.web3j.crypto.CipherException;
 import org.web3j.crypto.Credentials;
@@ -9,6 +11,8 @@ import org.web3j.protocol.Web3j;
 import org.web3j.tx.RawTransactionManager;
 import org.web3j.tx.ReadonlyTransactionManager;
 import org.web3j.tx.TransactionManager;
+import ru.comptech.bc.server.rest.RestException;
+import ru.comptech.bc.server.security.auth.WalletAuthentication;
 
 import java.io.IOException;
 
@@ -35,17 +39,11 @@ public class TransactionServiceImpl implements TransactionService {
     }
 
     private TransactionManager getWrite() {
-        final Credentials credentials;
-        try {
-            credentials = WalletUtils.loadCredentials(
-                    "1111",
-                    "/home/bolodya/Downloads/" +
-                            "UTC--2018-02-01T07-37-31.095482915Z--3a192eeeae04ab16f59d54aef2fb33b9d35592f0");
-//                            "UTC--2018-02-01T07-37-40.709258427Z--bfcb5ce3c723404ac96a95685377c1526927c070");
-        } catch (CipherException | IOException e) {
-            throw new UnsupportedOperationException();
-        }
+        final Authentication authentication =
+                SecurityContextHolder.getContext().getAuthentication();
+        if (!(authentication instanceof WalletAuthentication) || !authentication.isAuthenticated())
+            throw new RuntimeException("Not authorized");
 
-        return new RawTransactionManager(web3j, credentials);
+        return new RawTransactionManager(web3j, (Credentials) authentication.getDetails());
     }
 }

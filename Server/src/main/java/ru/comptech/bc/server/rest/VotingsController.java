@@ -3,6 +3,9 @@ package ru.comptech.bc.server.rest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.web.bind.annotation.*;
 import org.web3j.protocol.Web3j;
 import org.web3j.protocol.core.methods.response.TransactionReceipt;
@@ -15,6 +18,7 @@ import ru.comptech.bc.server.util.ExceptionSupplier;
 import ru.comptech.bc.server.util.DateFormatter;
 import ru.comptech.bc.server.transactions.TransactionService;
 
+import javax.annotation.security.RolesAllowed;
 import java.io.IOException;
 import java.math.BigInteger;
 import java.util.*;
@@ -103,6 +107,7 @@ public class VotingsController {
     }
 
     @PostMapping
+    @Secured("ROLE_USER")
     public Map<String, Integer> post(@RequestBody Map<String, Object> json) throws Exception {
         final TransactionManager manager = transactionService.get(TransactionService.Type.WRITE);
 
@@ -138,6 +143,7 @@ public class VotingsController {
     }
 
     @PutMapping(path = "/{id}")
+    @Secured("ROLE_USER")
     public void putById(@PathVariable Integer id,
                         @RequestBody Map<String, Object> json) throws Exception {
         final TransactionManager manager = transactionService.get(TransactionService.Type.WRITE);
