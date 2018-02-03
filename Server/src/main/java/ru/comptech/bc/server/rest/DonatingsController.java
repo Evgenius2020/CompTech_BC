@@ -172,10 +172,11 @@ public class DonatingsController {
             }
 
             BigInteger weiValue = BigInteger.valueOf(json.get("amount"));
+            BigInteger mul = BigInteger.TEN.pow(18);
 
             writeTransaction(() -> {
                 final TransactionReceipt transaction =
-                        donating.donate(id, weiValue).send();
+                        donating.donate(id, weiValue.multiply(mul)).send();
                 testTransaction(transaction);
                 return 0;
             });
