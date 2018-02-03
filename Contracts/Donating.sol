@@ -10,9 +10,7 @@ contract Donating {
         uint needToCollect;
         address walletAuthor;
         address walletReceiver;
-        uint startingTime;
-        uint endingTime;
-        bool isActive;
+        uint creatingTime;
     }
 
     event Creation(uint donationId);
@@ -23,7 +21,7 @@ contract Donating {
     mapping(uint => mapping(uint => address)) public moneysenders;
 
     function createDonation(string title, string description, uint needToCollect, 
-        address walletReceiver, uint secondsToVote) 
+        address walletReceiver) 
     public
     {
         require(secondsToVote != 0);
@@ -36,9 +34,7 @@ contract Donating {
         donation.needToCollect = needToCollect;
         donation.walletAuthor = msg.sender;
         donation.walletReceiver = walletReceiver;
-        donation.startingTime = now;        
-        donation.endingTime = now + secondsToVote;
-        donation.isActive = true;
+        donation.creatingTime = now;
         donation.amountOfPayers = 0;
         
         Creation(id);
@@ -48,10 +44,7 @@ contract Donating {
     payable
     public 
     {
-        require(donations[donationId].id != 0);
-        require(donations[donationId].isActive);
-        require(donations[donationId].endingTime >= now);        
-        require(msg.sender.balance >= msg.value);
+        require(checkDonateException(donationId) == 0);
 
         if (donates[donationId][msg.sender] == 0) {
             donations[donationId].amountOfPayers++;
@@ -62,8 +55,20 @@ contract Donating {
         donations[donationId].currentBalance += msg.value;
 
         if (this.balance >= donations[donationId].needToCollect) {
-            donations[donationId].isActive = false;
             donations[donationId].walletReceiver.transfer(this.balance);
         }
+    }
+
+    function checkDonateException(uint donationId) 
+    public
+    view
+    returns (uint)
+    {
+        if (donations[donationId].id == 0)
+            return 1;
+        if (donations[donationId].currentBalance >= 
+            donations[donationId].needToCollect)
+            return 2;
+        return 0;
     }
 }
