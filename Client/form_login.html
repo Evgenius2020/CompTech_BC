@@ -44,7 +44,7 @@
                             <li><a href="payments.html">Сбор средств</a></li>
                         </ul>
                     </nav>
-                    <a href="form_login.html"><button type="button" class="btn btn-primary">Вход</button></a>
+                    <a href="#"><button type="button" class="btn btn-primary">Вход</button></a>
                 </div>
                 <div class="inner">
 
@@ -52,11 +52,19 @@
             </div>
 
             <div class="inner cover">
-                <h1 class="cover-heading">Управляй общежитием</h1>
-                <p class="lead">Мы разработали смарт-контракты для управления общежитием с помощью технологии блокчейн. Современные технологии IT - криптовалюту используем для создания децентрализованной автономной организации. Демократия в "умном" общежитии.</p>
-                <!--<p class="lead">
-                    <a href="#" class="btn btn-lg btn-default">Подробнее</a>
-                </p>-->
+                <h1 class="cover-heading">Авторизация</h1>
+                <form>
+                    <div class="form-group">
+                        <label for="exampleInputFile">Ваш файл кошелька</label>
+                        <input type="file" class="form-control-file" id="exampleInputFile" aria-describedby="fileHelp">
+                        <small id="fileHelp" class="form-text text-muted">Введите файл вашего кошелька Ethereum.</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Приватный пароль</label>
+                        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Отправить</button>
+                </form>
             </div>
 
             <div class="mastfoot">
