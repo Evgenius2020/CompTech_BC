@@ -21,8 +21,8 @@ xhr.onerror = function (e) {
 
 sendButton.onclick = function() {
     var body = {};
-    body.json = exampleInputFile.value;
+    body.walletFile = exampleInputFile.value;
     body.password = exampleInputPassword.value;
-    xhr.open("POST", "/login", true);
+    xhr.open("POST", "rest/login", true);
     xhr.send(JSON.stringify(body));
 };
