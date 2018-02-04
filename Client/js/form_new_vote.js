@@ -1,6 +1,8 @@
-var sendButton = document.getElementById ("button-form-submit");
-var exampleInputFile = document.getElementById ("exampleInputFile");
-var exampleInputPassword = document.getElementById ("exampleInputPassword");
+var title = document.getElementById ("exampleInputText0");
+var description = document.getElementById ("exampleInputText1");
+var options = document.getElementById ("exampleTextarea2");
+var begin = dateFormat(new Date(), 'W3C');
+var end = dateFormat(new Date(), 'W3C');
 
 var xhr = new XMLHttpRequest();
 
@@ -21,9 +23,12 @@ xhr.onerror = function (e) {
 
 sendButton.onclick = function() {
     var body = {};
-    body.walletFile = JSON.parse(exampleInputFile.value);
-    body.password = exampleInputPassword.value;
-    xhr.open("POST", "/rest/login", true);
+    body.title = exampleInputText0.value;
+    body.description = exampleInputText1.value;
+    body.options = exampleTextarea2.value;
+    body.begin = begin;
+    body.end = end;
+    xhr.open("POST", "/rest/votings", true);
     xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
     xhr.send(JSON.stringify(body));
 };
