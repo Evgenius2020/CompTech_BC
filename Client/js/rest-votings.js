@@ -3,17 +3,6 @@
      */
 $( document ).ready(function() {
     /*
-    * Это функция для всплывающего окна "Список проголосовавших". Она делает GET-запрос по data-id
-     */
-    $('.ls-modal').on('click', function(e){
-        e.preventDefault();
-        var id = $(this).attr('data-id');
-        var url0 = "/rest/votings/";
-        var url1 = url0.concat(id.toString());
-        $(".modal-body").html(id);
-        $('#myModal').modal('show').find('.modal-body').load($(this).attr('href'));
-    });
-    /*
     * Это функция для выведения на экран список всех голосований. Делаем GET-запрос по Ajax
      */
     $.getJSON("/rest/votings/", function ( data, textStatus, jqXHR ) { // указываем url и функцию обратного вызова
@@ -87,4 +76,16 @@ $(".golosovanie").on("click", function(e) {
     xhr.open("PUT", "/rest/votings/"+body.optionId, true);
     xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
     xhr.send(JSON.stringify(body));
+});
+
+/*
+* Это функция для всплывающего окна "Список проголосовавших". Она делает GET-запрос по data-id
+ */
+$('.ls-modal').on('click', function(e){
+    e.preventDefault();
+    var id = $(this).attr('data-id');
+    var url0 = "/rest/votings/";
+    var url1 = url0.concat(id.toString());
+    $(".modal-body").html(id);
+    $('#myModal').modal('show').find('.modal-body').load($(this).attr('href'));
 });
