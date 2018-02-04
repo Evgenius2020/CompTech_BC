@@ -1,0 +1,28 @@
+var sendButton = document.getElementById ("button-form-submit");
+var exampleInputFile = document.getElementById ("exampleInputFile");
+var exampleInputPassword = document.getElementById ("exampleInputPassword");
+
+var xhr = new XMLHttpRequest();
+
+xhr.onload = function (e) {
+        if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+                alert(xhr.responseText);
+                document.location = ("index.html");
+            } else {
+                alert(xhr.statusText);
+            }
+        }
+    }
+;
+xhr.onerror = function (e) {
+    console.error(xhr.statusText);
+};
+
+sendButton.onclick = function() {
+    var body = {};
+    body.json = exampleInputFile.value;
+    body.password = exampleInputPassword.value;
+    xhr.open("POST", "/login", true);
+    xhr.send(JSON.stringify(body));
+};

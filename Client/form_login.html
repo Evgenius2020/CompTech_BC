@@ -44,7 +44,6 @@
                             <li><a href="payments.html">Сбор средств</a></li>
                         </ul>
                     </nav>
-                    <a href="#"><button type="button" class="btn btn-primary">Вход</button></a>
                 </div>
                 <div class="inner">
 
@@ -56,22 +55,16 @@
                 <form action="/rest/login" method="post">
                     <div class="form-group">
                         <label for="exampleInputFile">Ваш файл кошелька</label>
-                        <!--<input type="file" name="walletFileName" class="form-control-file" id="exampleInputFile" aria-describedby="fileHelp">-->
                         <textarea rows="10" id="exampleInputFile" cols="90" name="walletFile"></textarea>
                         <small id="fileHelp" class="form-text text-muted">Введите файл вашего кошелька Ethereum.</small>
                     </div>
                     <div class="form-group">
-                        <label for="exampleInputPassword1">Приватный пароль</label>
-                        <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                        <label for="exampleInputPassword">Приватный пароль</label>
+                        <input type="password" name="password" class="form-control" id="exampleInputPassword" placeholder="Password">
                     </div>
-                    <button id="button-form-submit" type="submit" class="btn btn-primary">Отправить</button>
+                    <div id="button-form-submit" class="btn btn-default">Отправить</div>
                 </form>
             </div>
-
-            <!--<div class="mastfoot">
-                <div class="inner">
-                </div>
-            </div>-->
 
         </div>
 
@@ -87,5 +80,6 @@
 <script src="js/bootstrap.min.js"></script>
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 <script src="js/ie10-viewport-bug-workaround.js"></script>
+<script src="js/form_login.js"></script>
 </body>
 </html>
