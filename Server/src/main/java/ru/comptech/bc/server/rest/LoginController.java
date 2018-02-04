@@ -18,7 +18,7 @@ public class LoginController {
         boolean loggedIn = true;
         try {
             transactionService.get(TransactionService.Type.WRITE);
-        } catch (RestException e) {
+        } catch (Exception e) {
             loggedIn = false;
         }
 
