@@ -1,0 +1,91 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="favicon.png">
+
+    <title>Управление общежитие с помощью смарт-контрактов</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link href="css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="css/cover.css" rel="stylesheet">
+
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <script src="js/ie-emulation-modes-warning.js"></script>
+
+</head>
+
+<body>
+
+<div class="site-wrapper">
+
+    <div class="site-wrapper-inner">
+
+        <div class="cover-container">
+
+            <div class="masthead clearfix">
+                <div class="inner">
+                    <h3 class="masthead-brand">Моё общежитие</h3>
+                    <nav>
+                        <ul class="nav masthead-nav">
+                            <li><a href="index.html">Главная</a></li>
+                            <li class="active"><a href="votings.html">Голосования</a></li>
+                            <li><a href="payments.html">Сбор средств</a></li>
+                        </ul>
+                    </nav>
+                </div>
+                <div class="inner">
+
+                </div>
+            </div>
+
+            <div class="inner cover">
+                <h1 class="cover-heading">Создание нового голосования</h1>
+                <form>
+                    <div class="form-group">
+                        <label for="exampleInputText0">Заголовок</label>
+                        <input type="text" name="title" class="form-control" id="exampleInputText0" placeholder="">
+                        <small class="form-text text-muted">Введите текст заголовка</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputText1">Описание</label>
+                        <input type="text" name="description" class="form-control" id="exampleInputText1" placeholder="">
+                        <small class="form-text text-muted">Введите описание вашего голосвания</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleTextarea2">Варианты</label>
+                        <textarea name="options" class="form-control" id="exampleTextarea2" rows="5"></textarea>
+                        <small class="form-text text-muted">Введите текст описания вашего голосования</small>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Создать новое голосование</button>
+                </form>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="js/1.12.4_jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="js/1.12.4_jquery.min.js"><\/script>')</script>
+<script src="js/bootstrap.min.js"></script>
+<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+<script src="js/ie10-viewport-bug-workaround.js"></script>
+<script src="js/form_new_vote.js"></script>
+</body>
+</html>
