@@ -119,6 +119,16 @@
                         '<h3 class="panel-title">'+title+'</h3>' +
                         '</div>' +
                         '<div id="'+panel_body_id+'" class="panel-body">' + description +
+                        '<br/><br/>Необходимо собрать: '+amountNeed +'<br/>' +
+                        '<br/>Уже собрано средств: '+amountGot +'<br/>'+
+                        '<br/>Автор: '+authorWallet+'<br/>'+
+                        '<br/>Кошелек получателя: '+receiverWallet+'<br/>'+
+                        '<br/>Дата создания: '+begin+'<br/>'+
+                        '<br/>Дата окончания: '+end+'<br/>'+
+                        '<br/>Активен сейчас сбор: '+active+'<br/>';
+                        '</div>' +
+                        '</div>' +
+                        '</div>' +
                         '</div>');
                     var percent = (votes/votes_summa*100).toFixed(0);
                     var sharp_panel_body_id = "#" + panel_body_id;
