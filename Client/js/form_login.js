@@ -24,5 +24,6 @@ sendButton.onclick = function() {
     body.walletFile = JSON.parse(exampleInputFile.value);
     body.password = exampleInputPassword.value;
     xhr.open("POST", "/rest/login", true);
+    xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
     xhr.send(JSON.stringify(body));
 };
