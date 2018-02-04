@@ -48,6 +48,7 @@ $( document ).ready(function() {
                     '<a data-id="'+i+'" class="ls-modal" href="#">Просмотреть список проголосовавших</a><br/>' +
                     '<span style="font-size: 12px;color:red;">Голосовать могут только авторизированные пользователи</span><br/>' +
                     '<div id="knopki-golos"></div>' +
+                    '<a href="form_new_vote.js.html"><button type="button" class="btn btn-primary">Создать новое голосование</button></a>' +
                     '</div>' +
                     '</div>');
                 var votes_summa = 0;
