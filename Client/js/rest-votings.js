@@ -48,7 +48,7 @@ $( document ).ready(function() {
                     '<a data-id="'+i+'" class="ls-modal" href="#">Просмотреть список проголосовавших</a><br/>' +
                     '<span style="font-size: 12px;color:red;">Голосовать могут только авторизированные пользователи</span><br/>' +
                     '<div id="knopki-golos"></div>' +
-                    '<a href="form_new_vote.js.html"><button type="button" class="btn btn-primary">Создать новое голосование</button></a>' +
+                    '<a href="form_new_vote.html"><button type="button" class="btn btn-primary">Создать новое голосование</button></a>' +
                     '</div>' +
                     '</div>');
                 var votes_summa = 0;
@@ -74,6 +74,17 @@ $( document ).ready(function() {
             });
         }
     });
+});
 
-
+/*
+* Кнопка голосовать на id
+ */
+$(".golosovanie").on("click", function(e) {
+    e.preventDefault();
+    var xhr = new XMLHttpRequest();
+    var body = {};
+    body.optionId = $(this).attr('data-id');
+    xhr.open("PUT", "/rest/votings/"+body.optionId, true);
+    xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+    xhr.send(JSON.stringify(body));
 });
