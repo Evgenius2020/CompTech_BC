@@ -47,6 +47,7 @@ $( document ).ready(function() {
                     '<div class="col-xs-6 col-md-4">' +
                     '<a data-id="'+i+'" class="ls-modal" href="#">Просмотреть список проголосовавших</a><br/>' +
                     '<span style="font-size: 12px;color:red;">Голосовать могут только авторизированные пользователи</span><br/>' +
+                    '<div id="knopki-golos"></div>' +
                     '</div>' +
                     '</div>');
                 var votes_summa = 0;
@@ -67,6 +68,7 @@ $( document ).ready(function() {
                         '<span class="sr-only">Complete</span>'+ votes +
                         '</div>' +
                         '</div>');
+                    $("#knopki-golos").append('<a data-id="'+number+'" class="golosovanie" href="votings.html"><button type="button" class="btn btn-info">Голосовать</button></a>');
                 }
             });
         }
