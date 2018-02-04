@@ -114,8 +114,8 @@ public class DonatingsController {
 
             final HashMap<String,Object> map = new HashMap<>();
             map.putAll(Map.of("id",id,"title",title,"description",description,"amountNeed", amountNeed, "amountGot",amountGot,
-                    "parts",parts,"authorWallet",walletAuthor,"receiverWallet",walletReceiver,"begin",startingTime.getTime()/1000,
-                    "end",endingTime.getTime()/1000));
+                    "parts",parts,"authorWallet",walletAuthor,"receiverWallet",walletReceiver,"begin",DateFormatter.dateToString(startingTime),
+                    "end",DateFormatter.dateToString(endingTime)));
             map.put("isActive",isActive);
             map.put("amountOfPayers", amountOfPayers);
 
@@ -123,7 +123,7 @@ public class DonatingsController {
         }
 
         @PostMapping
-        //@Secured("ROLE_USER")
+        @Secured("ROLE_USER")
         public Object createNewPayment (@RequestBody Map<String,Object> payment) throws Exception{
             final TransactionManager manager = transactionService.get(TransactionService.Type.WRITE);
 
@@ -156,7 +156,7 @@ public class DonatingsController {
         }
 
         @PutMapping(path = "/{paymentId}")
-        //@Secured("ROLE_USER")
+        @Secured("ROLE_USER")
         public void Donate(@PathVariable Integer paymentId,@RequestBody Map<String,Integer> json) throws Exception{
             final TransactionManager manager = transactionService.get(TransactionService.Type.WRITE);
             final Donating donating = Donating.load(contractAddres, web3j, manager, GAS_PRICE, GAS_LIMIT);
@@ -215,6 +215,4 @@ public class DonatingsController {
         if (transaction.getGasUsed().equals(GAS_LIMIT))
             throw CONTRACT_EXCEPTION;
     }
-
-
 }
