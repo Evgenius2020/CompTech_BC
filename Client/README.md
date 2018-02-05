@@ -20,10 +20,9 @@
 
 400 Wallet is incorrect
 
+
 ### /rest/login GET
 ### HTTP Request parameters:
-### HTTP Request header:
-### HTTP Request body:
 ### HTTP Response:
 200 OK
 ### HTTP Response header: application/json
@@ -32,10 +31,9 @@
   "loggedIn": true
 }
 
+
 ### /rest/logout POST
 ### HTTP Request parameters:
-### HTTP Request header:
-### HTTP Request body:
 ### HTTP Response:
 200 OK
 
