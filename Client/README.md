@@ -9,9 +9,14 @@
 ### HTTP Request header: application/json
 ### HTTP Request body:
 {
+
   "walletFile": "string",
+  
   "password": "string"
+  
 }
 ### HTTP Response:
 200 OK
+
 400 Wallet is incorrect
+
