@@ -5,11 +5,11 @@
 
 # Roles:
 
-## Smart-contract Developers: 
+## Ethereum Smart-contract Solidity Developers: 
 ### evgenius2020
 ### maksimov1
-## Java Web-server Developers:
+## Web-server Java Developers:
 ### Bolodya1997
 ### alexey-pie
-## JS Frontend Developers:
+## Web-client Frontend Developers:
 ### erdenirf
