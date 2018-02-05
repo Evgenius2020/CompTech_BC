@@ -168,3 +168,88 @@ votingId = (int) 1..maxId        //ID of the voting to vote in
 #### HTTP Response code:\
 403 Not authorized
 
+## payments
+
+### /rest/payments GET
+#### HTTP Request parameters:
+#### HTTP Response code:
+200 OK
+#### HTTP Response header: application/json
+#### HTTP Response body:
+{
+
+  "maxId": 0
+  
+}
+
+### /rest/payments/{paymentId} GET
+#### HTTP Request parameters:
+paymentId = (int) 1..maxId  //ID of the payment to get
+#### HTTP Response code:
+200 OK
+#### HTTP Response header: application/json
+#### HTTP Response body:
+{
+
+  "id": 0,
+  
+  "title": "string",
+  
+  "description": "string",
+  
+  "amountNeed": 0,
+  
+  "amountGot": 0,
+  
+  "parts": [
+  
+    {
+    
+      "wallet": "string",
+      
+      "amount": 0
+      
+    }
+    
+  ],
+  
+  "authorWallet": "string",
+  
+  "receiverWallet": "string",
+  
+  "begin": "2018-02-05T20:19:12.123Z",
+  
+  "end": "2018-02-05T20:19:12.123Z",
+  
+  "active": true
+  
+}
+
+#### HTTP Response code:
+404 Not found
+
+### /rest/payments/{paymentId} PUT
+#### HTTP Request parameters:
+paymentId = (int) 1..maxId  //ID of the payment to take part in
+#### HTTP Request header: application/json
+#### HTTP Request body:
+{
+
+  "amount": 0
+  
+}
+
+#### HTTP Response code:
+200 OK
+
+#### HTTP Response code:
+400 Incorrect data
+
+#### HTTP Responce code:
+402 Not enough money
+
+#### HTTP Response code:
+403 Not authorized
+
+#### HTTP Response code:
+404 Not found
